@@ -3,12 +3,12 @@ var client = redis.createClient(process.env.REDIS_URL);
 var scan = require('redisscan');
 
 module.exports = {
-  updateUserStatus = function(username, text) {
+  updateUserStatus: function(username, text) {
     var key = 'user_status:' + username;
     client.set(key, text);
   },
 
-  getAllStatuses = function(callback) {
+  getAllStatuses: function(callback) {
     var returnText = 'Here\'s the latest Availability: \n\n';
 
     scan({
