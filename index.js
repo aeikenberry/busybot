@@ -37,14 +37,12 @@ app.post('/slack/receive', function(request, response) {
 
   console.log(request.body);
 
-  bot.updateUserStatus(request.body.user_name, request.body.text, function() {
-    bot.getAllStatuses(function(all) {
-      return response.json({
-        text: all
-      });
+  bot.updateUserStatus(request.body.user_name, request.body.text);
+  bot.getAllStatuses(function(all) {
+    return response.json({
+      text: all
     });
   });
-
 });
 
 app.listen(app.get('port'), function() {
