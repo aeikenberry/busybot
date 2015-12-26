@@ -40,7 +40,6 @@ app.post('/slack/receive', function(request, response) {
     });
   });
 
-
 });
 
 app.listen(app.get('port'), function() {
