@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var bodyParser = require('bodyParser');
+var bodyParser = require('body-parser');
 var redis = require('redis');
 var client = redis.createClient(process.env.REDIS_URL);
 var bot = require('./bot.js');
