@@ -21,7 +21,6 @@ module.exports = {
         cb();
       },
       done_callback: function (err) {
-          redis.quit();
           return callback(returnText);
       }
     });
