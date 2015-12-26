@@ -5,6 +5,7 @@ var scan = require('redisscan');
 module.exports = {
   updateUserStatus: function(username, text, cb) {
     var key = 'user_status:' + username;
+    console.log('setting ', key, text);
     client.set(key, text, cb);
   },
 
