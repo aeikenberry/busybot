@@ -12,7 +12,7 @@ module.exports = {
     var returnText = 'Here\'s the latest Availability: \n\n';
 
     scan({
-      redis: redis,
+      redis: client,
       pattern: 'user_status:*',
       each_callback: function (type, key, subkey, value, cb) {
         console.log(type, key, subkey, value);
