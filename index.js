@@ -32,6 +32,8 @@ app.post('/slack/receive', function(request, response) {
   response_url=https://hooks.slack.com/commands/1234/5678
   */
 
+  console.log(request.body);
+
   bot.updateUserStatus(request.body.user_name, request.body.text, function() {
     bot.getAllStatuses(function(all) {
       return response.json({
