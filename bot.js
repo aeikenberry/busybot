@@ -18,7 +18,7 @@ module.exports = {
       each_callback: function (type, key, subkey, other, value, cb) {
         console.log(type, key, subkey, value);
         var username = key.split('user_status:')[1];
-        returnText += username + ': ' + value;
+        returnText += username + ': ' + value + '\n\n';
         cb();
       },
       done_callback: function (err) {
