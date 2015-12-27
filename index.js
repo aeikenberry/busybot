@@ -23,21 +23,22 @@ app.get('/', function(request, response) {
 
 app.post('/slack/receive', function(request, response) {
   /*
-  token=gIkuvaNzQIHg97ATvDxqgjtO
+  token=TqO2aXceZ2XQnK4hyN1KvDMX
   team_id=T0001
   team_domain=example
   channel_id=C2147483705
   channel_name=test
+  timestamp=1355517523.000005
   user_id=U2147483697
   user_name=Steve
-  command=/weather
-  text=94070
-  response_url=https://hooks.slack.com/commands/1234/5678
+  text=googlebot: What is the air-speed velocity of an unladen swallow?
+  trigger_word=googlebot:
   */
 
-  console.log(request.body);
+  var text = request.body.text.split(request.body.trigger_word)[1].trim();
 
-  bot.updateUserStatus(request.body.user_name, request.body.text);
+
+  bot.updateUserStatus(request.body.user_name, text);
   bot.getAllStatuses(function(all) {
     return response.json({
       text: all
