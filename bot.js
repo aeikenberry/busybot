@@ -36,7 +36,7 @@ module.exports = {
     });
   },
 
-  postStatusUpdate: function(fields) {
+  postStatusUpdate: function(fields, cb) {
     return request.post({
       url: INCOMING_URL,
       formData: {
@@ -49,6 +49,6 @@ module.exports = {
           }
         ]
       }
-    });
+    }, cb);
   }
 };
