@@ -1,6 +1,9 @@
 var redis = require('redis');
+var request = require('request');
 var client = redis.createClient(process.env.REDIS_URL);
 var scan = require('redisscan');
+
+var INCOMING_URL = process.env.INCOMING_WEBHOOK_URL;
 
 module.exports = {
   updateUserStatus: function(username, text) {
@@ -10,19 +13,41 @@ module.exports = {
   },
 
   getAllStatuses: function(callback) {
-    var returnText = 'Here\'s the latest Availability: \n\n';
+    var fields = [];
 
     scan({
       redis: client,
       pattern: 'user_status:*',
       each_callback: function (type, key, subkey, other, value, cb) {
         console.log(type, key, subkey, value);
+
         var username = key.split('user_status:')[1];
-        returnText += username + ': ' + value + '\n\n';
+
+        fields.push({
+          "title": username,
+          "value": value,
+          "short": false
+        });
         cb();
       },
       done_callback: function (err) {
-          return callback(returnText);
+          return callback(fields);
+      }
+    });
+  },
+
+  postStatusUpdate: function(fields) {
+    return request.post({
+      url: INCOMING_URL,
+      formData: {
+        "attachments": [
+          {
+            "fallback": "Here's the latest Availibility",
+            "pretext": "Here's the latest Availibility",
+            "color": "#333333",
+            "fields": fields
+          }
+        ]
       }
     });
   }

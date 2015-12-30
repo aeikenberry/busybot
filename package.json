@@ -11,7 +11,8 @@
     "ejs": "2.3.3",
     "express": "4.13.3",
     "redis": "^2.4.2",
-    "redisscan": "^1.1.0"
+    "redisscan": "^1.1.0",
+    "request": "^2.67.0"
   },
   "engines": {
     "node": "0.12.7"
