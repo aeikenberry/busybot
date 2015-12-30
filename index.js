@@ -24,10 +24,9 @@ app.get('/', function(request, response) {
 app.post('/slack/receive', function(request, response) {
   bot.updateUserStatus(request.body.user_name, request.body.text);
   bot.getAllStatuses(function(fields) {
-    bot.postStatusUpdate(fields, function() {
-      return response.json({
-        text: "Status updated."
-      });
+    bot.postStatusUpdate(fields);
+    return response.json({
+      text: "Status updated."
     });
   });
 });
