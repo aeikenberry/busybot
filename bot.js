@@ -4,6 +4,7 @@ var client = redis.createClient(process.env.REDIS_URL);
 var scan = require('redisscan');
 
 var INCOMING_URL = process.env.INCOMING_WEBHOOK_URL;
+var slack = require('slack-notify')(INCOMING_URL);
 
 module.exports = {
   updateUserStatus: function(username, text) {
@@ -37,18 +38,14 @@ module.exports = {
   },
 
   postStatusUpdate: function(fields, cb) {
-    return request.post({
-      url: INCOMING_URL,
-      formData: {
-        "attachments": [
-          {
-            "fallback": "Here's the latest Availibility",
-            "pretext": "Here's the latest Availibility",
-            "color": "#333333",
-            "fields": fields
-          }
-        ]
-      }
-    }, cb);
+    console.log(fields);
+    slack.alert({
+      text: "Availability updated.",
+      attachments: [
+        fallback: 'Availability updated.',
+        fields: fields
+      ]
+    });
+    slack.send({}, cb);
   }
 };
