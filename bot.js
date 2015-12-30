@@ -46,6 +46,7 @@ module.exports = {
         fields: fields
       }]
     });
+
     slack.send({
       channel: '#availability',
       icon_url: 'http://example.com/my-icon.png',
@@ -53,5 +54,9 @@ module.exports = {
       unfurl_links: 1,
       username: 'Jimmy'
     }, cb);
+
+    slack.onError = function (err) {
+      console.log('API error:', err);
+    };
   }
 };
