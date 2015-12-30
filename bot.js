@@ -3,6 +3,7 @@ var request = require('request');
 var client = redis.createClient(process.env.REDIS_URL);
 var scan = require('redisscan');
 
+var CHANNEL = process.env.CHANNEL;
 var INCOMING_URL = process.env.INCOMING_WEBHOOK_URL;
 var slack = require('slack-notify')(INCOMING_URL);
 
@@ -39,7 +40,7 @@ module.exports = {
 
   postStatusUpdate: function(fields, cb) {
     slack.send({
-      channel: '#availbility',
+      channel: CHANNEL,
       text: "Availability updated.",
       username: 'Availability Robot',
       attachments: [{
