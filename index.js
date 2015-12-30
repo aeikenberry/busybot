@@ -34,7 +34,7 @@ app.post('/slack/receive', function(request, response) {
   text=googlebot: What is the air-speed velocity of an unladen swallow?
   trigger_word=googlebot:
   */
-
+  console.log(request.body);
   var text = request.body.text.split(request.body.trigger_word)[1].trim();
 
 
