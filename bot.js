@@ -48,7 +48,7 @@ module.exports = {
     });
 
     slack.send({
-      channel: '#availability',
+      channel: '#availibility',
       icon_url: 'http://example.com/my-icon.png',
       text: 'Here is my notification',
       unfurl_links: 1,
