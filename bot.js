@@ -41,10 +41,10 @@ module.exports = {
     console.log(fields);
     slack.alert({
       text: "Availability updated.",
-      attachments: [
+      attachments: [{
         fallback: 'Availability updated.',
         fields: fields
-      ]
+      }]
     });
     slack.send({}, cb);
   }
