@@ -22,7 +22,7 @@ app.get('/', function(request, response) {
 });
 
 app.post('/slack/receive', function(request, response) {
-  bot.updateUserStatus(request.body.user_name, request.body.text);
+  bot.updateUserStatus(request.body.user_name, request.body.text || 'BUSY');
   bot.getAllStatuses(function(fields) {
     bot.postStatusUpdate(fields, function() {
       return response.json({

@@ -21,8 +21,6 @@ module.exports = {
       redis: client,
       pattern: 'user_status:*',
       each_callback: function (type, key, subkey, other, value, cb) {
-        console.log(type, key, subkey, value);
-
         var username = key.split('user_status:')[1];
 
         fields.push({
