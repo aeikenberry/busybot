@@ -39,18 +39,14 @@ module.exports = {
 
   postStatusUpdate: function(fields, cb) {
     console.log(fields);
-    slack.alert({
+    slack.send({
       text: "Availability updated.",
+      username: 'Availability Robot',
       attachments: [{
         fallback: 'Availability updated.',
         fields: fields
       }]
     });
-
-    slack.send({
-      text: 'Availability Updated.',
-      username: 'Availability Robot'
-    }, cb);
 
     slack.onError = function (err) {
       console.log('API error:', err);
