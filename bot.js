@@ -46,6 +46,12 @@ module.exports = {
         fields: fields
       }]
     });
-    slack.send({}, cb);
+    slack.send({
+      channel: '#availability',
+      icon_url: 'http://example.com/my-icon.png',
+      text: 'Here is my notification',
+      unfurl_links: 1,
+      username: 'Jimmy'
+    }, cb);
   }
 };
