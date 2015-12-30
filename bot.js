@@ -38,7 +38,6 @@ module.exports = {
   },
 
   postStatusUpdate: function(fields, cb) {
-    console.log(fields);
     slack.send({
       channel: '#availbility',
       text: "Availability updated.",
@@ -47,7 +46,7 @@ module.exports = {
         fallback: 'Availability updated.',
         fields: fields
       }]
-    });
+    }, cb);
 
     slack.onError = function (err) {
       console.log('API error:', err);
