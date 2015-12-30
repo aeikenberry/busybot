@@ -48,11 +48,8 @@ module.exports = {
     });
 
     slack.send({
-      channel: '#availbility',
-      icon_url: 'http://example.com/my-icon.png',
-      text: 'Here is my notification',
-      unfurl_links: 1,
-      username: 'Jimmy'
+      text: 'Availability Updated.',
+      username: 'Availability Robot'
     }, cb);
 
     slack.onError = function (err) {
