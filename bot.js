@@ -40,6 +40,7 @@ module.exports = {
   postStatusUpdate: function(fields, cb) {
     console.log(fields);
     slack.send({
+      channel: '#availbility',
       text: "Availability updated.",
       username: 'Availability Robot',
       attachments: [{
