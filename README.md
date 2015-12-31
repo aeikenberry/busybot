@@ -1,9 +1,6 @@
 # Slack Busy Bot
 
-## Setup
-
 ## Server
-
 ### Make this Node app publicly accessible.
 ### Get a publicly-accessible Redis Instance
 ### Set Config/Env Vars
@@ -14,8 +11,6 @@
 - REDIS_URL
 
 ## Slack Config
-
-### Slash Command
 
 - Create a new slash command, whatever you want ie `/busy`
   - Set the url to `http://yourdomain.biz/slack/receive`
