@@ -1,5 +1,7 @@
 # Slack Busy Bot
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## Server
 ### Make this Node app publicly accessible.
 ### Get a publicly-accessible Redis Instance

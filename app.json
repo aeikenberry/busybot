@@ -3,5 +3,10 @@
   "description": "Slack Bot for tracking your teams availability",
   "repository": "https://github.com/aeikenberry/busy-bot",
   "keywords": ["node", "express", "static"],
-  "image": "heroku/nodejs"
+  "image": "heroku/nodejs",
+  "addons": ["heroku-redis:hobby-dev", "papertrail"],
+  "env": {
+    "INCOMING_WEBHOOK_URL": "http://changeme.com",
+    "CHANNEL": "#general"
+  }
 }
