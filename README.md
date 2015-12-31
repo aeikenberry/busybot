@@ -17,3 +17,9 @@
   
 - Create an incoming webhook
   - note the url created, set it as your INCOMING_WEBHOOK_URL
+
+## Usage
+
+![Setting your availibility](https://dl.dropboxusercontent.com/u/12840891/Screen%20Shot%202015-12-30%20at%207.34.37%20PM.png)
+
+![Prints to your selected channel] (https://dl.dropboxusercontent.com/u/12840891/Screen%20Shot%202015-12-30%20at%207.34.56%20PM.png)
