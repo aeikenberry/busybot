@@ -1,5 +1,4 @@
 var redis = require('redis');
-var request = require('request');
 var client = redis.createClient(process.env.REDIS_URL);
 var scan = require('redisscan');
 
