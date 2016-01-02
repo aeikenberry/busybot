@@ -19,7 +19,7 @@ module.exports = {
   updateUserStatus: function(username, userID, text) {
     var status = this.parseStatusText(text);
     var statusKey = USER_STATUS_KEY + username;
-    client.setex([statusKey, EIGHT_HOURS_SECONDS, text], redis.print);
+    client.setex([statusKey, EIGHT_HOURS_SECONDS, status], redis.print);
     this.addUser(username, userID);
   },
 
@@ -27,9 +27,8 @@ module.exports = {
     if (!text) return 'BUSY';
 
     var command = text.split(' ')[0];
-    console.log(command);
-    if (commands[command]) {
 
+    if (commands[command]) {
       return commands[command] + text.substring(text.length - command.length);
     }
 
