@@ -26,7 +26,7 @@ module.exports = {
   parseStatusText: function(text) {
     if (!text) return 'BUSY';
 
-    var command = commands[text.split(' ')[0];
+    var command = text.split(' ')[0];
 
     if (commands[command]) {
 
