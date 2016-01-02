@@ -27,7 +27,7 @@ module.exports = {
     if (!text) return 'BUSY';
 
     var command = text.split(' ')[0];
-    print(command);
+    console.log(command);
     if (commands[command]) {
 
       return commands[command] + text.substring(text.length - command.length);
