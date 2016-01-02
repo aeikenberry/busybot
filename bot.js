@@ -63,7 +63,7 @@ module.exports = {
       text: 'What\'s your status? Please tell me!',
       username: "Availability Robot"
     });
-  }
+  },
 
   getAllStatuses: function(callback) {
     var fields = [];
