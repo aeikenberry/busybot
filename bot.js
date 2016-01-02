@@ -1,26 +1,78 @@
 var redis = require('redis');
 var client = redis.createClient(process.env.REDIS_URL);
 var scan = require('redisscan');
+var slack = require('slack-notify')(process.env.INCOMING_WEBHOOK_URL);
 
 var CHANNEL = process.env.CHANNEL;
-var INCOMING_URL = process.env.INCOMING_WEBHOOK_URL;
-var slack = require('slack-notify')(INCOMING_URL);
+var EIGHT_HOURS_SECONDS = String(60 * 60 * 8);
+var USER_STATUS_KEY = 'user_status:';
+var TEAM_MEMBERS_KEY = 'team_members:';
+
+var commands = {
+  'green': ':green_apple:',
+  'yellow': ':yellow_heart:',
+  'red': ':red_circle:',
+  'black': ':black_circle:'
+};
 
 module.exports = {
-  updateUserStatus: function(username, text) {
-    var key = 'user_status:' + username;
-    console.log('setting ', key, text);
-    client.set(key, text, redis.print);
+  updateUserStatus: function(username, userID, text) {
+    var status = this.parseStatusText(text);
+    var statusKey = USER_STATUS_KEY + username;
+    client.setex([statusKey, EIGHT_HOURS_SECONDS, text], redis.print);
+    this.addUser(username, userID);
   },
+
+  parseStatusText: function(text) {
+    if (!text) return 'BUSY';
+
+    var command = commands[text.split(' ')[0];
+
+    if (commands[command]) {
+
+      return commands[command] + text.substring(text.length - command.length);
+    }
+
+    return text;
+  },
+
+  addUser: function(username, userID) {
+    var teamKey = TEAM_MEMBERS_KEY + userID;
+    client.set(teamKey, username, redis.print);
+  },
+
+  getUserNames: function(callback) {
+    var users = [];
+
+    scan({
+      redis: client,
+      pattern: TEAM_MEMBERS_KEY + '*',
+      each_callback: function (type, key, subkey, other, value, cb) {
+        users.push(value);
+        cb();
+      },
+      done_callback: function (err) {
+          return callback(users);
+      }
+    });
+  },
+
+  sendAvailabilityReminder: function(username) {
+    slack.send({
+      channel: '@' + username,
+      text: 'What\'s your status? Please tell me!',
+      username: "Availability Robot"
+    });
+  }
 
   getAllStatuses: function(callback) {
     var fields = [];
 
     scan({
       redis: client,
-      pattern: 'user_status:*',
+      pattern: USER_STATUS_KEY + '*',
       each_callback: function (type, key, subkey, other, value, cb) {
-        var username = key.split('user_status:')[1];
+        var username = key.split(USER_STATUS_KEY)[1];
 
         fields.push({
           "title": username,

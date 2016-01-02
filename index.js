@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.post('/slack/receive', function(request, response) {
-  bot.updateUserStatus(request.body.user_name, request.body.text || 'BUSY');
+  bot.updateUserStatus(request.body.user_name, request.body.user_id, request.body.text);
   bot.getAllStatuses(function(fields) {
     bot.postStatusUpdate(fields, function() {
       return response.json({
