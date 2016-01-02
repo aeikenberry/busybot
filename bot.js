@@ -29,7 +29,7 @@ module.exports = {
     var command = text.split(' ')[0];
 
     if (commands[command]) {
-      return commands[command] + text.substring(text.length - command.length);
+      return commands[command] + '  ' + text.replace(command, '');
     }
 
     return text;
