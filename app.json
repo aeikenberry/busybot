@@ -7,6 +7,10 @@
   "addons": ["heroku-redis:hobby-dev", "papertrail"],
   "env": {
     "INCOMING_WEBHOOK_URL": "http://changeme.com",
-    "CHANNEL": "#general"
+    "CHANNEL": "#general",
+    "GREEN_ICON": ":green_apple:",
+    "YELLOW_ICON": ":yellow_heart:",
+    "RED_ICON": ":red_circle:",
+    "BLACK_ICON": ":black_circle:"
   }
 }

@@ -9,10 +9,10 @@ var USER_STATUS_KEY = 'user_status:';
 var TEAM_MEMBERS_KEY = 'team_members:';
 
 var commands = {
-  'green': ':green_apple:',
-  'yellow': ':yellow_heart:',
-  'red': ':red_circle:',
-  'black': ':black_circle:'
+  'green': process.env.GREEN_ICON || ':green_apple:',
+  'yellow': process.env.YELLOW_ICON || ':yellow_heart:',
+  'red': process.env.RED_ICON || ':red_circle:',
+  'black': process.env.BLACK_ICON || ':black_circle:'
 };
 
 module.exports = {
